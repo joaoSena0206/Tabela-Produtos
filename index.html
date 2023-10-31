@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Produtos</title>
+	<link rel="stylesheet" type="text/css" href="css/estiloGeral.css">
+
+</head>
+
+<body>
+	<div class="block escondido"></div>
+	<section class="areaNovoProduto escondido">
+		<div>
+			<label for="txtCodigo">Código:</label>
+			<input type="text" id="txtCodigo" disabled="disabled">
+		</div>
+		<div>
+			<label for="txtNome">Nome:</label>
+			<input type="text" id="txtNome" placeholder="Nome do Produto" autofocus>
+		</div>
+		<div>
+			<label for="txtQtd">Quantidade:</label>
+			<input type="number" id="txtQtd" min="0" max="9999" step="1" placeholder="Quantidade do Produto">
+		</div>
+		<div>
+			<label for="txtValor">Valor:</label>
+			<input type="number" id="txtValor" min="0" max="99999" step="0.01" placeholder="Valor unitário">
+		</div>
+		<div>
+			<button class="btnSalvar">Salvar</button>
+			<button class="btnCancelar">Cancelar</button>
+		</div>
+		
+	</section>
+	<main>
+		<header>
+			<h1>Produtos</h1>
+			<button class="btnNovo">Novo</button>
+		</header>
+
+		<table>
+			<thead>
+				<th>Código</th>
+				<th>Nome</th>
+				<th>Quantidade</th>
+				<th>Valor</th>
+				<th>Situação</th>
+			</thead>
+			<tbody>
+				<tr class="linha-produto">
+					<td>1001</td>
+					<td>Coca-Cola</td>
+					<td>200</td>
+					<td>12,00</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1002</td>
+					<td>Pepsi</td>
+					<td>150</td>
+					<td>10,00</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1003</td>
+					<td>Sprite</td>
+					<td>100</td>
+					<td>8,00</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1004</td>
+					<td>Fanta</td>
+					<td>120</td>
+					<td>9,50</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1005</td>
+					<td>Mountain Dew</td>
+					<td>80</td>
+					<td>7,50</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1006</td>
+					<td>Dr. Pepper</td>
+					<td>189</td>
+					<td>8,50</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1007</td>
+					<td>7UP</td>
+					<td>90</td>
+					<td>9,00</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1008</td>
+					<td>Root Beer</td>
+					<td>40</td>
+					<td>6,00</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1009</td>
+					<td>Orange Crush</td>
+					<td>70</td>
+					<td>7,00</td>
+					<td></td>
+				</tr>
+				<tr class="linha-produto">
+					<td>1010</td>
+					<td>Ginger Ale</td>
+					<td>156</td>
+					<td>5,00</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</main>
+	<script type='text/javascript' src="js/script.js"></script>
+</body>
+
+</html>
