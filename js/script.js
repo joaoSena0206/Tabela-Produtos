@@ -9,6 +9,15 @@ function verificarSituacaoEstoque(quantidade) {
     }
 }
 
+function formatarMoeda(valor) 
+{
+    const numero = Number(valor.replace(",", "."));
+    const formatoMoeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const valorFormatado = formatoMoeda.format(numero);
+
+    return valorFormatado;
+}
+
 
 const linhasProdutos = document.querySelectorAll('.linha-produto');
 const btnNovo = document.querySelector('.btnNovo');
@@ -16,15 +25,16 @@ const btnCancelar = document.querySelector(".btnCancelar");
 const btnSalvar = document.querySelector(".btnSalvar");
 
 let tbody;
-let maiorCdAtual = 0;
 
 // Irá verificar a situação do produto e adicionará a situação no html
 for (let i = 0; i < linhasProdutos.length; i++) {
 
     const localQuantidade = linhasProdutos[i].children[2];
     const localSituacao = linhasProdutos[i].children[4];
+    const localVl = linhasProdutos[i].children[3];
 
     localSituacao.innerHTML = verificarSituacaoEstoque(localQuantidade.textContent);
+    localVl.textContent = formatarMoeda(localVl.textContent);
 }
 
 /* Ao clicar no botão novo, mostrará na tela um formulário para que o usuário responda,
@@ -38,8 +48,7 @@ btnNovo.addEventListener('click', function (e) {
     });
 
     tbody = document.querySelector("tbody");
-    maiorCdAtual = Number(tbody.lastElementChild.children[0].textContent) + 1;
-    document.querySelector("#txtCodigo").value = maiorCdAtual;
+    document.querySelector("#txtCodigo").value = Number(tbody.children[tbody.children.length - 1].children[0].textContent) + 1;
 });
 
 // Ao clicar no botão cancelar, esconderá o formulário
@@ -62,12 +71,11 @@ btnSalvar.addEventListener("click", function (e) {
     const vlProduto = document.createElement("td");
     const situacaoProduto = document.createElement("td");
     const cdNovo = document.createElement("td");
-    
 
-    cdNovo.textContent = maiorCdAtual;
+    cdNovo.textContent = document.querySelector("#txtCodigo").value;
     nmProduto.textContent = document.querySelector("#txtNome").value;
     qtProduto.textContent = document.querySelector("#txtQtd").value;
-    vlProduto.textContent = document.querySelector("#txtValor").value.replace(".", ",");
+    vlProduto.textContent = formatarMoeda(document.querySelector("#txtValor").value)
     situacaoProduto.innerHTML = verificarSituacaoEstoque(qtProduto.textContent);
 
     linhaProdutoNovo.appendChild(cdNovo);
