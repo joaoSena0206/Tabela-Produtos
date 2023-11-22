@@ -29,6 +29,7 @@ for (let i = 0; i < linhasProdutos.length; i++) {
 
 /* Ao clicar no botão novo, mostrará na tela um formulário para que o usuário responda,
    junto com o maior código disponível */
+
 btnNovo.addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -47,7 +48,7 @@ btnCancelar.addEventListener("click", function (e) {
         e.style.display = "none";
     });
     
-    // Reseta os valores da tabela
+    // Reseta os valores do formulario
     document.querySelector("#txtNome").value = "";
     document.querySelector("#txtQtd").value = "";
     document.querySelector("#txtValor").value = "";
@@ -55,18 +56,36 @@ btnCancelar.addEventListener("click", function (e) {
 
 // Ao clicar no botão salvar, adicionará os dados digitados pelo usuário na tabela
 btnSalvar.addEventListener("click", function (e) {
-    console.log(`Código: ${maiorCdAtual}`);
-    console.log(`Nome: ${document.querySelector("#txtNome").value}`);
-    console.log(`Quantidade: ${document.querySelector("#txtQtd").value}`);
-    console.log(`Valor: ${document.querySelector("#txtValor").value}`);
+    const linhaProdutoNovo = document.createElement("tr"); 
+    const nmProduto = document.createElement("td");
+    const qtProduto = document.createElement("td");
+    const vlProduto = document.createElement("td");
+    const situacaoProduto = document.createElement("td");
+    const cdNovo = document.createElement("td");
+    
 
-    // Reseta os valores do formulário
-    document.querySelector("#txtNome").value = "";
-    document.querySelector("#txtQtd").value = "";
-    document.querySelector("#txtValor").value = "";
+    cdNovo.textContent = maiorCdAtual;
+    nmProduto.textContent = document.querySelector("#txtNome").value;
+    qtProduto.textContent = document.querySelector("#txtQtd").value;
+    vlProduto.textContent = document.querySelector("#txtValor").value.replace(".", ",");
+    situacaoProduto.innerHTML = verificarSituacaoEstoque(qtProduto.textContent);
+
+    linhaProdutoNovo.appendChild(cdNovo);
+    linhaProdutoNovo.appendChild(nmProduto);
+    linhaProdutoNovo.appendChild(qtProduto);
+    linhaProdutoNovo.appendChild(vlProduto); 
+    linhaProdutoNovo.appendChild(situacaoProduto);
+
+    tbody.appendChild(linhaProdutoNovo);
+
 
     // Esconde o formulário
     document.querySelectorAll(".escondido").forEach(e => {
         e.style.display = "none";
     });
+
+    // Reseta os valores da tabela
+    document.querySelector("#txtNome").value = "";
+    document.querySelector("#txtQtd").value = "";
+    document.querySelector("#txtValor").value = "";
 });
