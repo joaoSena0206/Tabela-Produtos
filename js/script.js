@@ -17,6 +17,16 @@ function formatarMoeda(valor) {
     return valorFormatado;
 }
 
+
+// Adiciona o event listener ao botão delete do produto criado.
+function addDelete(btn)
+{
+    btn.addEventListener("click", function(e) {
+        const linhaProduto = e.target.parentElement.parentElement;
+        linhaProduto.remove();
+    });
+}
+
 function adicionarLinha(produto) {
     const linhaProdutoNovo = document.createElement("tr");
     const nmProduto = document.createElement("td");
@@ -24,22 +34,24 @@ function adicionarLinha(produto) {
     const vlProduto = document.createElement("td");
     const situacaoProduto = document.createElement("td");
     const cdNovo = document.createElement("td");
-    const btnDelete = document.createElement("td");
-    btnDelete.classList.add("delete");
+    const buttonDelete = document.createElement("td");
+    buttonDelete.classList.add("delete");
+    addDelete(buttonDelete);
+    
 
     cdNovo.textContent = produto.codigo;
     nmProduto.textContent = produto.nome;
     qtProduto.textContent = produto.qtd;
     vlProduto.textContent = produto.valor;
     situacaoProduto.innerHTML = produto.situacao;
-    btnDelete.innerHTML = produto.delete;
+    buttonDelete.innerHTML = produto.delete;
 
     linhaProdutoNovo.appendChild(cdNovo);
     linhaProdutoNovo.appendChild(nmProduto);
     linhaProdutoNovo.appendChild(qtProduto);
     linhaProdutoNovo.appendChild(vlProduto);
     linhaProdutoNovo.appendChild(situacaoProduto);
-    linhaProdutoNovo.appendChild(btnDelete);
+    linhaProdutoNovo.appendChild(buttonDelete);
 
     tbody.appendChild(linhaProdutoNovo);
 }
@@ -56,6 +68,7 @@ const linhasProdutos = document.querySelectorAll('.linha-produto');
 const btnNovo = document.querySelector('.btnNovo');
 const btnCancelar = document.querySelector(".btnCancelar");
 const btnSalvar = document.querySelector(".btnSalvar");
+const btnsDelete = document.querySelectorAll(".delete");
 const barraPesquisa = document.querySelector(".pesquisa");
 
 let tbody;
@@ -70,6 +83,14 @@ for (let i = 0; i < linhasProdutos.length; i++) {
     localSituacao.innerHTML = verificarSituacaoEstoque(localQuantidade.textContent);
     localVl.textContent = formatarMoeda(localVl.textContent);
 }
+
+// Adiciona a função de deletar para cada btnDelete já criado na tabela
+btnsDelete.forEach(btnDelete => {
+    btnDelete.addEventListener("click", function(e) {
+        const linhaProduto = e.target.parentElement.parentElement;
+        linhaProduto.remove();
+    });
+});
 
 // Quando o usuário digitar na barra de pesquisa, mudará a tabela
 barraPesquisa.addEventListener("input", function (e) {
@@ -131,3 +152,5 @@ btnSalvar.addEventListener("click", function (e) {
     // Reseta os valores da tabela
     resetaFormulario();
 });
+
+// Ao clicar no botão de delete, deleta o produto da tabela
