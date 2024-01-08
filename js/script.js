@@ -24,18 +24,22 @@ function adicionarLinha(produto) {
     const vlProduto = document.createElement("td");
     const situacaoProduto = document.createElement("td");
     const cdNovo = document.createElement("td");
+    const btnDelete = document.createElement("td");
+    btnDelete.classList.add("delete");
 
     cdNovo.textContent = produto.codigo;
     nmProduto.textContent = produto.nome;
     qtProduto.textContent = produto.qtd;
     vlProduto.textContent = produto.valor;
     situacaoProduto.innerHTML = produto.situacao;
+    btnDelete.innerHTML = produto.delete;
 
     linhaProdutoNovo.appendChild(cdNovo);
     linhaProdutoNovo.appendChild(nmProduto);
     linhaProdutoNovo.appendChild(qtProduto);
     linhaProdutoNovo.appendChild(vlProduto);
     linhaProdutoNovo.appendChild(situacaoProduto);
+    linhaProdutoNovo.appendChild(btnDelete);
 
     tbody.appendChild(linhaProdutoNovo);
 }
@@ -113,7 +117,8 @@ btnSalvar.addEventListener("click", function (e) {
         'nome': document.querySelector("#txtNome").value,
         'qtd': document.querySelector("#txtQtd").value,
         'valor': formatarMoeda(document.querySelector("#txtValor").value),
-        'situacao': verificarSituacaoEstoque(document.querySelector("#txtQtd").value)
+        'situacao': verificarSituacaoEstoque(document.querySelector("#txtQtd").value),
+        'delete': document.querySelector(".delete").innerHTML
     };
 
     adicionarLinha(produto);
