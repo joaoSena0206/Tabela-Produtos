@@ -52,6 +52,7 @@ const linhasProdutos = document.querySelectorAll('.linha-produto');
 const btnNovo = document.querySelector('.btnNovo');
 const btnCancelar = document.querySelector(".btnCancelar");
 const btnSalvar = document.querySelector(".btnSalvar");
+const barraPesquisa = document.querySelector(".pesquisa");
 
 let tbody;
 
@@ -66,9 +67,26 @@ for (let i = 0; i < linhasProdutos.length; i++) {
     localVl.textContent = formatarMoeda(localVl.textContent);
 }
 
+// Quando o usuário digitar na barra de pesquisa, mudará a tabela
+barraPesquisa.addEventListener("input", function (e) {
+    let txtPesquisa = e.target.value.toLowerCase();
+
+    const produtos = document.querySelectorAll('.linha-produto');
+    produtos.forEach(produto => {
+        if (produto.children[1].textContent.toLowerCase().includes(txtPesquisa))
+        {
+            produto.classList.remove("escondido");
+        }   
+        else
+        {
+            produto.classList.add("escondido");
+        }
+    });
+});
+
+
 /* Ao clicar no botão novo, mostrará na tela um formulário para que o usuário responda,
    junto com o maior código disponível */
-
 btnNovo.addEventListener('click', function (e) {
     document.querySelectorAll(".escondido").forEach(e => {
         e.style.display = "block";
